@@ -20,6 +20,7 @@ CSV_FILE = APP_FOLDER / "experiment_results.csv"
 
 CSV_COLUMNS = [
     "timestamp",
+    "participant_id",
     "visual_condition",
     "contrast_level",
     "size_level",
@@ -50,6 +51,41 @@ def create_csv():
             )
 
             writer.writeheader()
+
+        return
+
+    with open(CSV_FILE, "r", newline="", encoding="utf-8") as file:
+
+        reader = csv.DictReader(file)
+
+        existing_columns = reader.fieldnames or []
+
+        if existing_columns == CSV_COLUMNS:
+
+            return
+
+        if not set(existing_columns).issubset(CSV_COLUMNS):
+
+            raise ValueError(
+                "The results CSV contains columns that this app does not recognize."
+            )
+
+        existing_results = list(reader)
+
+    temporary_file = CSV_FILE.with_suffix(".csv.tmp")
+
+    with open(temporary_file, "w", newline="", encoding="utf-8") as file:
+
+        writer = csv.DictWriter(
+            file,
+            fieldnames=CSV_COLUMNS
+        )
+
+        writer.writeheader()
+
+        writer.writerows(existing_results)
+
+    temporary_file.replace(CSV_FILE)
 
 
 def save_result(result):
@@ -86,6 +122,8 @@ class HumanPerformanceTester(ctk.CTk):
         self.contrast = "Medium"
         self.size = "Medium"
         self.brightness = 80
+
+        self.participant_id = tk.StringVar(self)
 
         self.current_frame = None
 
@@ -245,6 +283,8 @@ class HumanPerformanceTester(ctk.CTk):
                 timespec="seconds"
             ),
 
+            "participant_id": self.participant_id.get().strip(),
+
             "visual_condition": self.get_visual_condition(),
 
             "contrast_level": self.contrast,
@@ -305,12 +345,33 @@ class HumanPerformanceTester(ctk.CTk):
             font=("Arial", 14)
         ).pack(pady=5)
 
+        ctk.CTkLabel(
+            dashboard,
+            text="Anonymous participant ID (use the same ID for each task):",
+            font=("Arial", 12)
+        ).pack(pady=(12, 3))
+
+        ctk.CTkEntry(
+            dashboard,
+            textvariable=self.participant_id,
+            width=280,
+            placeholder_text="For example, P01"
+        ).pack(pady=3)
+
+        self.dashboard_status = ctk.CTkLabel(
+            dashboard,
+            text="Do not enter participant names.",
+            font=("Arial", 11)
+        )
+
+        self.dashboard_status.pack(pady=(2, 5))
+
         ctk.CTkButton(
             dashboard,
             text="Identification Task",
             width=280,
             height=48,
-            command=self.show_identification
+            command=self.begin_identification
         ).pack(pady=12)
 
         ctk.CTkButton(
@@ -318,7 +379,7 @@ class HumanPerformanceTester(ctk.CTk):
             text="Target Hitting Task (Fitts' Law)",
             width=280,
             height=48,
-            command=self.start_fitts
+            command=self.begin_fitts
         ).pack(pady=12)
 
         ctk.CTkButton(
@@ -347,6 +408,37 @@ class HumanPerformanceTester(ctk.CTk):
     # ======================================================
     # 5. VISUAL SETTINGS
     # ======================================================
+
+    def require_participant_id(self):
+
+        participant_id = self.participant_id.get().strip()
+
+        if not participant_id:
+
+            self.dashboard_status.configure(
+                text="Enter an anonymous participant ID before starting a task."
+            )
+
+            return False
+
+        self.participant_id.set(participant_id)
+
+        return True
+
+
+    def begin_identification(self):
+
+        if self.require_participant_id():
+
+            self.show_identification()
+
+
+    def begin_fitts(self):
+
+        if self.require_participant_id():
+
+            self.start_fitts()
+
 
     def show_settings(self):
 
@@ -515,7 +607,7 @@ class HumanPerformanceTester(ctk.CTk):
 
         self.title_block(
             "Identification Task",
-            "Look carefully at the figure and identify what you see."
+            "Look carefully at the silhouette and describe what you see."
         )
 
         background, text_color, _ = self.get_visual_colors()
@@ -598,63 +690,50 @@ class HumanPerformanceTester(ctk.CTk):
             bg=background
         )
 
-        # Left silhouette
+        # Combine a duck-like bill and rabbit-like ears in one silhouette.
         canvas.create_polygon(
-            35, 45,
-            205, 45,
-            205, 88,
-            180, 102,
-            205, 116,
-            178, 130,
-            202, 145,
-            185, 180,
-            150, 218,
-            35, 250,
+            165, 137,
+            215, 132,
+            233, 112,
+            257, 99,
+            287, 92,
+            314, 96,
+            330, 48,
+            350, 29,
+            367, 40,
+            361, 99,
+            381, 35,
+            402, 25,
+            416, 40,
+            398, 111,
+            427, 120,
+            447, 143,
+            450, 174,
+            438, 201,
+            412, 220,
+            373, 230,
+            326, 226,
+            283, 211,
+            250, 190,
+            228, 166,
+            165, 157,
+            smooth=True,
+            splinesteps=24,
             fill=text_color,
             outline=text_color
         )
 
-        # Right silhouette
-        canvas.create_polygon(
-            585, 45,
-            415, 45,
-            415, 88,
-            440, 102,
-            415, 116,
-            442, 130,
-            418, 145,
-            435, 180,
-            470, 218,
-            585, 250,
-            fill=text_color,
-            outline=text_color
-        )
-
-        # Central vase-shaped negative space
-        canvas.create_polygon(
-            270, 55,
-            350, 55,
-            340, 115,
-            375, 170,
-            365, 220,
-            255, 220,
-            245, 170,
-            280, 115,
+        canvas.create_oval(
+            280, 124,
+            292, 136,
             fill=background,
             outline=background
-        )
-
-        canvas.create_line(
-            270, 55,
-            350, 55,
-            fill=text_color,
-            width=2
         )
 
         canvas.create_text(
             310,
             270,
-            text="Look carefully at the shape",
+            text="One silhouette, more than one possible interpretation",
             fill=text_color,
             font=("Arial", self.get_font_size(13))
         )
