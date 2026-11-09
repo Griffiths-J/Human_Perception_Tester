@@ -1,0 +1,3 @@
+timestamp,visual_condition,contrast_level,size_level,brightness_percent,task_type,time_taken_seconds,ease_of_use_rating,identification_response,target_size_px,target_distance_px,trial_number
+2026-11-09T13:58:46,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,38.0,1,feels like two humans on left andd right,,,
+2026-11-09T13:59:21,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,15.943,3,,60,240,1
