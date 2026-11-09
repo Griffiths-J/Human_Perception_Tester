@@ -13,3 +13,9 @@ timestamp,participant_id,visual_condition,contrast_level,size_level,brightness_p
 2026-11-09T15:02:05,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,13.038,3,name,,,
 2026-11-09T15:02:17,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,1.742,3,,24,120,1
 2026-11-09T15:02:26,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,4.29,3,,24,120,2
+2026-11-09T15:20:11,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,40.867,3,dog,,,
+2026-11-09T15:45:04,1,Contrast=Medium; Size=Medium; Brightness=65%,Medium,Medium,65,Identification,16.161,3,a dog,,,
+2026-11-09T15:45:23,1,Contrast=Medium; Size=Medium; Brightness=65%,Medium,Medium,65,Target Hitting,2.001,3,,60,240,1
+2026-11-09T15:45:30,1,Contrast=Medium; Size=Medium; Brightness=65%,Medium,Medium,65,Target Hitting,2.608,3,,24,240,2
+2026-11-09T15:45:42,1,Contrast=Medium; Size=Medium; Brightness=65%,Medium,Medium,65,Target Hitting,1.221,1,,24,120,3
+2026-11-09T15:45:51,1,Contrast=Medium; Size=Medium; Brightness=65%,Medium,Medium,65,Target Hitting,1.598,3,,60,240,4
