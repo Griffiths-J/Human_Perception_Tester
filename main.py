@@ -743,6 +743,14 @@ class HumanPerformanceTester(ctk.CTk):
 
             return
 
+        if not any(character.isalpha() for character in response):
+
+            self.identification_status.configure(
+                text="Please describe what you see using words, not only numbers."
+            )
+
+            return
+
         elapsed = (
             time.perf_counter() - self.identification_start
         )
