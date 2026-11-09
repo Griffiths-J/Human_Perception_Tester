@@ -5,3 +5,8 @@ timestamp,participant_id,visual_condition,contrast_level,size_level,brightness_p
 2026-11-09T14:36:20,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,3.417,3,,60,240,2
 2026-11-09T14:36:28,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,2.75,3,,24,120,3
 2026-11-09T14:36:34,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Target Hitting,1.815,3,,24,240,4
+2026-11-09T14:48:21,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,11.285,3,6,,,
+2026-11-09T14:48:22,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,12.691,3,6,,,
+2026-11-09T14:48:24,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,14.194,3,6,,,
+2026-11-09T14:55:41,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,5.518,3,he,,,
+2026-11-09T14:55:46,1,Contrast=Medium; Size=Medium; Brightness=80%,Medium,Medium,80,Identification,4.78,3,4,,,

@@ -542,14 +542,6 @@ class HumanPerformanceTester(ctk.CTk):
 
         brightness_slider.pack(pady=5)
 
-        ctk.CTkLabel(
-            panel,
-            text="Brightness is simulated using background colours. "
-                 "It does not change your physical screen brightness.",
-            wraplength=650,
-            font=("Arial", 11)
-        ).pack(pady=12)
-
         ctk.CTkButton(
             self.current_frame,
             text="Back to Dashboard",
@@ -654,7 +646,7 @@ class HumanPerformanceTester(ctk.CTk):
 
         self.identification_status = ctk.CTkLabel(
             self.current_frame,
-            text="Ask someone other than the developer to complete this task."
+            text=""
         )
 
         self.identification_status.pack(pady=5)
